@@ -1,50 +1,113 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { SITE_DESCRIPTION } from '../consts';
+
+// Configuración de enlaces - Cambia estos valores por los tuyos
+const USERNAME = "Sr. Verde";
+const BIO = "Creador de contenido y desarrollador. ¡Bienvenido a mi espacio digital!";
+const AVATAR_URL = "/favicon.svg"; // Reemplaza por tu foto de perfil en public/
+
+const SOCIAL_LINKS = [
+	{ name: "Discord", url: "https://discord.gg/invite-code", icon: "💬", color: "#5865F2" },
+	{ name: "Facebook", url: "https://facebook.com/tu-pagina", icon: "🔵", color: "#1877F2" },
+	{ name: "Instagram", url: "https://instagram.com/tu-usuario", icon: "📸", color: "#E1306C" },
+	{ name: "Ko-fi", url: "https://ko-fi.com/tu-usuario", icon: "☕", color: "#FF5E5B" }
+];
+
+// Configuración de Embeds - Reemplaza con tus IDs y URLs reales
+const DISCORD_WIDGET_ID = "123456789012345678"; // ID de tu servidor (Activa el widget en Configuración del Servidor > Widget)
+const FACEBOOK_PAGE_URL = "https://www.facebook.com/facebook"; // URL de tu página de Facebook
+const INSTAGRAM_POST_ID = "CLPzW4Xlz_d"; // ID de un post de Instagram para mostrar (ej: de https://www.instagram.com/p/CLPzW4Xlz_d/)
+const KOFI_USERNAME = "srverde"; // Nombre de usuario en Ko-fi
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`${USERNAME} | Links & Socials`} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<!-- Perfil -->
+			<header class="profile">
+				<img src={AVATAR_URL} alt={USERNAME} class="avatar" />
+				<h1 class="name">{USERNAME}</h1>
+				<p class="bio">{BIO}</p>
+			</header>
+
+			<!-- Linktree / Enlaces -->
+			<section>
+				<h2 class="section-title">Enlaces Directos</h2>
+				<div class="links-list">
+					{SOCIAL_LINKS.map(link => (
+						<a href={link.url} target="_blank" rel="noopener noreferrer" class="link-button">
+							<span style={`color: ${link.color}; font-size: 1.25rem;`}>{link.icon}</span>
+							<span>{link.name}</span>
+						</a>
+					))}
+				</div>
+			</section>
+
+			<!-- Embeds / Redes Sincronizadas -->
+			<section>
+				<h2 class="section-title">Redes Sincronizadas</h2>
+				<div class="embeds-list">
+					<!-- Discord -->
+					<div class="embed-card">
+						<h3>💬 Comunidad en Discord</h3>
+						<div class="embed-container">
+							<iframe 
+								src={`https://discord.com/widget?id=${DISCORD_WIDGET_ID}&theme=dark`} 
+								class="discord-widget" 
+								style="border: none;"
+								sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+							</iframe>
+						</div>
+					</div>
+
+					<!-- Ko-fi -->
+					<div class="embed-card">
+						<h3>☕ Apóyame en Ko-fi</h3>
+						<div class="embed-container" style="height: 400px; overflow-y: auto;">
+							<iframe 
+								src={`https://ko-fi.com/${KOFI_USERNAME}/?hidefeed=true&widget=true&embed=true`} 
+								style="border:none; width:100%; height: 500px; background:#1b212f;" 
+								title="Ko-fi Embed">
+							</iframe>
+						</div>
+					</div>
+
+					<!-- Instagram Post -->
+					<div class="embed-card">
+						<h3>📸 Publicación Destacada</h3>
+						<div class="embed-container">
+							<iframe 
+								src={`https://www.instagram.com/p/${INSTAGRAM_POST_ID}/embed`} 
+								class="iframe-embed" 
+								style="border: none; overflow: hidden;">
+							</iframe>
+						</div>
+					</div>
+
+					<!-- Facebook Page -->
+					<div class="embed-card">
+						<h3>🔵 Facebook Feed</h3>
+						<div class="embed-container">
+							<iframe 
+								src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FACEBOOK_PAGE_URL)}&tabs=timeline&width=500&height=350&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true`} 
+								class="iframe-embed" 
+								style="border: none; overflow: hidden;" 
+								allowfullscreen="true" 
+								allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer>
+				<p>&copy; {new Date().getFullYear()} {USERNAME}. Hecho con Astro & Cloudflare Pages.</p>
+			</footer>
 		</main>
-		<Footer />
 	</body>
 </html>
