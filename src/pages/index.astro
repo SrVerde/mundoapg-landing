@@ -5,14 +5,14 @@ import DiscordIcon from '../components/icons/DiscordIcon.astro';
 import KofiIcon from '../components/icons/KofiIcon.astro';
 import TwitchIcon from '../components/icons/TwitchIcon.astro';
 import BrandLogo from '../components/icons/BrandLogo.astro';
+import FacebookIcon from '../components/icons/FacebookIcon.astro';
 
 // Configuración de perfil
 const USERNAME = "Sr. Verde";
 
-// Configuración de URLs y Widgets (Reemplaza con tus datos)
-const INSTAGRAM_URL = "https://instagram.com/tu-usuario";
-const FACEBOOK_URL = "https://facebook.com/tu-pagina";
+// Configuración de URLs y Widgets
 const TWITCH_URL = "https://twitch.tv/srverdoso";
+const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61590075654102";
 
 const DISCORD_URL = "https://discord.gg/NhNTRxuZuu";
 const DISCORD_WIDGET_ID = "690350889210609972";
@@ -35,21 +35,25 @@ const KOFI_WIDGET_URL = "https://ko-fi.com/mundoapg/?hidefeed=true&widget=true&e
 
 			<!-- Botones de Enlace (Solo visibles en Móvil) -->
 			<nav class="mobile-links-container">
-				<a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" class="mobile-link-button">
+				<a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" class="brand-link-button">
 					<DiscordIcon size={20} />
 					UNETE AL DISCORD
 				</a>
-				<a href={KOFI_URL} target="_blank" rel="noopener noreferrer" class="mobile-link-button">
+				<a href={KOFI_URL} target="_blank" rel="noopener noreferrer" class="brand-link-button">
 					<KofiIcon size={20} />
 					COMPRANOS UN CAFE
 				</a>
-				<a href="https://twitch.tv/srverdoso" target="_blank" rel="noopener noreferrer" class="mobile-link-button">
+				<a href="https://twitch.tv/srverdoso" target="_blank" rel="noopener noreferrer" class="brand-link-button">
 					<TwitchIcon size={20} />
 					SRVERDOSO
 				</a>
-				<a href="https://twitch.tv/imcapitanzod" target="_blank" rel="noopener noreferrer" class="mobile-link-button">
+				<a href="https://twitch.tv/imcapitanzod" target="_blank" rel="noopener noreferrer" class="brand-link-button">
 					<TwitchIcon size={20} />
 					IMCAPITANZOD
+				</a>
+				<a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" class="brand-link-button">
+					<FacebookIcon size={20} />
+					FACEBOOK
 				</a>
 			</nav>
 
@@ -76,7 +80,7 @@ const KOFI_WIDGET_URL = "https://ko-fi.com/mundoapg/?hidefeed=true&widget=true&e
 					</iframe>
 				</div>
 
-				<!-- Columna 3: Stack de Twitch (srverdoso y imcapitanzod) -->
+				<!-- Columna 3: Stack de Twitch + Facebook -->
 				<div class="twitch-stack">
 					<!-- Twitch: srverdoso -->
 					<iframe 
@@ -93,6 +97,12 @@ const KOFI_WIDGET_URL = "https://ko-fi.com/mundoapg/?hidefeed=true&widget=true&e
 						allowfullscreen="true"
 						title="Twitch imcapitanzod">
 					</iframe>
+
+					<!-- Facebook Button -->
+					<a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" class="brand-link-button">
+						<FacebookIcon size={20} />
+						FACEBOOK
+					</a>
 				</div>
 			</div>
 
