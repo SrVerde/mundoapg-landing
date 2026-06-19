@@ -2,23 +2,46 @@
 import BaseHead from '../components/BaseHead.astro';
 import { SITE_DESCRIPTION } from '../consts';
 
-// Configuración de enlaces - Cambia estos valores por los tuyos
+// Configuración de perfil
 const USERNAME = "Sr. Verde";
 const BIO = "Creador de contenido y desarrollador. ¡Bienvenido a mi espacio digital!";
 const AVATAR_URL = "/favicon.svg"; // Reemplaza por tu foto de perfil en public/
 
-const SOCIAL_LINKS = [
-	{ name: "Discord", url: "https://discord.gg/invite-code", icon: "💬", color: "#5865F2" },
-	{ name: "Facebook", url: "https://facebook.com/tu-pagina", icon: "🔵", color: "#1877F2" },
-	{ name: "Instagram", url: "https://instagram.com/tu-usuario", icon: "📸", color: "#E1306C" },
-	{ name: "Ko-fi", url: "https://ko-fi.com/tu-usuario", icon: "☕", color: "#FF5E5B" }
+// Configuración de las tarjetas
+const CARDS = [
+	{
+		name: "Discord",
+		url: "https://discord.gg/invite-code",
+		icon: "💬",
+		color: "#5865F2",
+		placeholderText: "Únete a nuestra comunidad. 120 miembros en línea.",
+		buttonText: "Entrar al Servidor"
+	},
+	{
+		name: "Ko-fi",
+		url: "https://ko-fi.com/tu-usuario",
+		icon: "☕",
+		color: "#FF5E5B",
+		placeholderText: "Apoya mi trabajo con una donación o compra un café.",
+		buttonText: "Apoyar en Ko-fi"
+	},
+	{
+		name: "Instagram",
+		url: "https://instagram.com/tu-usuario",
+		icon: "📸",
+		color: "#E1306C",
+		placeholderText: "Mira mis últimas publicaciones y reels diarios.",
+		buttonText: "Ver Instagram"
+	},
+	{
+		name: "Facebook",
+		url: "https://facebook.com/tu-pagina",
+		icon: "🔵",
+		color: "#1877F2",
+		placeholderText: "Sigue mis novedades, estados y eventos en Facebook.",
+		buttonText: "Ir a Facebook"
+	}
 ];
-
-// Configuración de Embeds - Reemplaza con tus IDs y URLs reales
-const DISCORD_WIDGET_ID = "123456789012345678"; // ID de tu servidor (Activa el widget en Configuración del Servidor > Widget)
-const FACEBOOK_PAGE_URL = "https://www.facebook.com/facebook"; // URL de tu página de Facebook
-const INSTAGRAM_POST_ID = "CLPzW4Xlz_d"; // ID de un post de Instagram para mostrar (ej: de https://www.instagram.com/p/CLPzW4Xlz_d/)
-const KOFI_USERNAME = "srverde"; // Nombre de usuario en Ko-fi
 ---
 
 <!doctype html>
@@ -35,75 +58,28 @@ const KOFI_USERNAME = "srverde"; // Nombre de usuario en Ko-fi
 				<p class="bio">{BIO}</p>
 			</header>
 
-			<!-- Linktree / Enlaces -->
-			<section>
-				<h2 class="section-title">Enlaces Directos</h2>
-				<div class="links-list">
-					{SOCIAL_LINKS.map(link => (
-						<a href={link.url} target="_blank" rel="noopener noreferrer" class="link-button">
-							<span style={`color: ${link.color}; font-size: 1.25rem;`}>{link.icon}</span>
-							<span>{link.name}</span>
-						</a>
-					))}
-				</div>
-			</section>
-
-			<!-- Embeds / Redes Sincronizadas -->
-			<section>
-				<h2 class="section-title">Redes Sincronizadas</h2>
-				<div class="embeds-list">
-					<!-- Discord -->
-					<div class="embed-card">
-						<h3>💬 Comunidad en Discord</h3>
-						<div class="embed-container">
-							<iframe 
-								src={`https://discord.com/widget?id=${DISCORD_WIDGET_ID}&theme=dark`} 
-								class="discord-widget" 
-								style="border: none;"
-								sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-							</iframe>
+			<!-- Grid 2x2 de Tarjetas -->
+			<div class="grid-container">
+				{CARDS.map(card => (
+					<div class="card">
+						<div class="card-header">
+							<a href={card.url} target="_blank" rel="noopener noreferrer">
+								<span style={`color: ${card.color};`}>{card.icon}</span>
+								<span>{card.name}</span>
+							</a>
+							<span class="card-arrow">↗</span>
+						</div>
+						<div class="card-body">
+							<div class="embed-placeholder">
+								<p>{card.placeholderText}</p>
+								<a href={card.url} target="_blank" rel="noopener noreferrer" class="embed-placeholder-btn" style={`background-color: ${card.color};`}>
+									{card.buttonText}
+								</a>
+							</div>
 						</div>
 					</div>
-
-					<!-- Ko-fi -->
-					<div class="embed-card">
-						<h3>☕ Apóyame en Ko-fi</h3>
-						<div class="embed-container" style="height: 400px; overflow-y: auto;">
-							<iframe 
-								src={`https://ko-fi.com/${KOFI_USERNAME}/?hidefeed=true&widget=true&embed=true`} 
-								style="border:none; width:100%; height: 500px; background:#1b212f;" 
-								title="Ko-fi Embed">
-							</iframe>
-						</div>
-					</div>
-
-					<!-- Instagram Post -->
-					<div class="embed-card">
-						<h3>📸 Publicación Destacada</h3>
-						<div class="embed-container">
-							<iframe 
-								src={`https://www.instagram.com/p/${INSTAGRAM_POST_ID}/embed`} 
-								class="iframe-embed" 
-								style="border: none; overflow: hidden;">
-							</iframe>
-						</div>
-					</div>
-
-					<!-- Facebook Page -->
-					<div class="embed-card">
-						<h3>🔵 Facebook Feed</h3>
-						<div class="embed-container">
-							<iframe 
-								src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(FACEBOOK_PAGE_URL)}&tabs=timeline&width=500&height=350&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true`} 
-								class="iframe-embed" 
-								style="border: none; overflow: hidden;" 
-								allowfullscreen="true" 
-								allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-							</iframe>
-						</div>
-					</div>
-				</div>
-			</section>
+				))}
+			</div>
 
 			<footer>
 				<p>&copy; {new Date().getFullYear()} {USERNAME}. Hecho con Astro & Cloudflare Pages.</p>
