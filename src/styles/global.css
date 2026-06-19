@@ -115,7 +115,7 @@ main {
 	align-items: center;
 	gap: 0.75rem;
 	font-size: 1rem;
-	transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease, color 0.2s ease;
+	transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease, color 0.2s ease;
 	width: 100%;
 	box-sizing: border-box;
 	cursor: pointer;
@@ -124,7 +124,8 @@ main {
 .brand-link-button:hover {
 	background-color: var(--forest-green);
 	color: #ffffff;
-	transform: translateY(-3px) scale(1.025);
+	transform: translateY(-4px);
+	box-shadow: 4px 4px 0px var(--ink-black);
 }
 
 /* Botones de móvil (ocultos por defecto en Desktop) */
