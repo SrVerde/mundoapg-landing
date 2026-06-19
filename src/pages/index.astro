@@ -1,47 +1,23 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import { SITE_DESCRIPTION } from '../consts';
+import DiscordIcon from '../components/icons/DiscordIcon.astro';
+import KofiIcon from '../components/icons/KofiIcon.astro';
+import TwitchIcon from '../components/icons/TwitchIcon.astro';
 
 // Configuración de perfil
 const USERNAME = "Sr. Verde";
-const BIO = "Creador de contenido y desarrollador. ¡Bienvenido a mi espacio digital!";
-const AVATAR_URL = "/favicon.svg"; // Reemplaza por tu foto de perfil en public/
 
-// Configuración de las tarjetas
-const CARDS = [
-	{
-		name: "Discord",
-		url: "https://discord.gg/invite-code",
-		icon: "💬",
-		color: "#5865F2",
-		placeholderText: "Únete a nuestra comunidad. 120 miembros en línea.",
-		buttonText: "Entrar al Servidor"
-	},
-	{
-		name: "Ko-fi",
-		url: "https://ko-fi.com/tu-usuario",
-		icon: "☕",
-		color: "#FF5E5B",
-		placeholderText: "Apoya mi trabajo con una donación o compra un café.",
-		buttonText: "Apoyar en Ko-fi"
-	},
-	{
-		name: "Instagram",
-		url: "https://instagram.com/tu-usuario",
-		icon: "📸",
-		color: "#E1306C",
-		placeholderText: "Mira mis últimas publicaciones y reels diarios.",
-		buttonText: "Ver Instagram"
-	},
-	{
-		name: "Facebook",
-		url: "https://facebook.com/tu-pagina",
-		icon: "🔵",
-		color: "#1877F2",
-		placeholderText: "Sigue mis novedades, estados y eventos en Facebook.",
-		buttonText: "Ir a Facebook"
-	}
-];
+// Configuración de URLs y Widgets (Reemplaza con tus datos)
+const INSTAGRAM_URL = "https://instagram.com/tu-usuario";
+const FACEBOOK_URL = "https://facebook.com/tu-pagina";
+const TWITCH_URL = "https://twitch.tv/srverdoso";
+
+const DISCORD_URL = "https://discord.gg/invite-code";
+const DISCORD_WIDGET_ID = "690350889210609972";
+
+const KOFI_URL = "https://ko-fi.com/mundoapg";
+const KOFI_WIDGET_URL = "https://ko-fi.com/mundoapg/?hidefeed=true&widget=true&embed=true&preview=true";
 ---
 
 <!doctype html>
@@ -51,39 +27,77 @@ const CARDS = [
 	</head>
 	<body>
 		<main>
-			<!-- Perfil -->
-			<header class="profile">
-				<img src={AVATAR_URL} alt={USERNAME} class="avatar" />
-				<h1 class="name">{USERNAME}</h1>
-				<p class="bio">{BIO}</p>
+			<!-- Logo de la Marca -->
+			<header class="brand-header">
+				<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="logo-placeholder">
+					<rect x="3" y="3" width="18" height="18" rx="4" stroke-dasharray="3 3"/>
+					<circle cx="12" cy="12" r="4"/>
+				</svg>
 			</header>
 
-			<!-- Grid 2x2 de Tarjetas -->
-			<div class="grid-container">
-				{CARDS.map(card => (
-					<div class="card">
-						<div class="card-header">
-							<a href={card.url} target="_blank" rel="noopener noreferrer">
-								<span style={`color: ${card.color};`}>{card.icon}</span>
-								<span>{card.name}</span>
-							</a>
-							<span class="card-arrow">↗</span>
-						</div>
-						<div class="card-body">
-							<div class="embed-placeholder">
-								<p>{card.placeholderText}</p>
-								<a href={card.url} target="_blank" rel="noopener noreferrer" class="embed-placeholder-btn" style={`background-color: ${card.color};`}>
-									{card.buttonText}
-								</a>
-							</div>
-						</div>
-					</div>
-				))}
+			<!-- Botones de Enlace (Solo visibles en Móvil) -->
+			<nav class="mobile-links-container">
+				<a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" class="mobile-link-button">
+					<DiscordIcon size={20} />
+					UNETE AL DISCORD
+				</a>
+				<a href={KOFI_URL} target="_blank" rel="noopener noreferrer" class="mobile-link-button">
+					<KofiIcon size={20} />
+					COMPRANOS UN CAFE
+				</a>
+				<a href="https://twitch.tv/srverdoso" target="_blank" rel="noopener noreferrer" class="mobile-link-button">
+					<TwitchIcon size={20} />
+					SRVERDOSO
+				</a>
+				<a href="https://twitch.tv/imcapitanzod" target="_blank" rel="noopener noreferrer" class="mobile-link-button">
+					<TwitchIcon size={20} />
+					IMCAPITANZOD
+				</a>
+			</nav>
+
+			<!-- Contenedor Galería Asimétrica (3 Columnas en Desktop) -->
+			<div class="gallery-container">
+				<!-- Columna 1: Discord -->
+				<div class="iframe-wrapper">
+					<iframe 
+						src={`https://discord.com/widget?id=${DISCORD_WIDGET_ID}&theme=dark`} 
+						style="width: 100%; height: 580px; border: none; display: block; border-radius: 4px;" 
+						allowtransparency="true" 
+						sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+						title="Discord Widget">
+					</iframe>
+				</div>
+
+				<!-- Columna 2: Ko-fi -->
+				<div class="iframe-wrapper">
+					<iframe 
+						id="kofiframe" 
+						src={KOFI_WIDGET_URL} 
+						style="border: none; width: 100%; height: 580px; background: #f9f9f9; display: block; border-radius: 4px;" 
+						title="mundoapg">
+					</iframe>
+				</div>
+
+				<!-- Columna 3: Stack de Twitch (srverdoso y imcapitanzod) -->
+				<div class="twitch-stack">
+					<!-- Twitch: srverdoso -->
+					<iframe 
+						src={`https://player.twitch.tv/?channel=srverdoso&parent=localhost&parent=${Astro.url.hostname}`} 
+						class="twitch-stack-iframe"
+						allowfullscreen="true"
+						title="Twitch srverdoso">
+					</iframe>
+
+					<!-- Twitch: imcapitanzod -->
+					<iframe 
+						src={`https://player.twitch.tv/?channel=imcapitanzod&parent=localhost&parent=${Astro.url.hostname}`} 
+						class="twitch-stack-iframe"
+						allowfullscreen="true"
+						title="Twitch imcapitanzod">
+					</iframe>
+				</div>
 			</div>
 
-			<footer>
-				<p>&copy; {new Date().getFullYear()} {USERNAME}. Hecho con Astro & Cloudflare Pages.</p>
-			</footer>
 		</main>
 	</body>
 </html>
