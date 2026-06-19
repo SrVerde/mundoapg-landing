@@ -30,7 +30,16 @@ const KOFI_WIDGET_URL = "https://ko-fi.com/mundoapg/?hidefeed=true&widget=true&e
 		<main>
 			<!-- Logo de la Marca -->
 			<header class="brand-header">
-				<BrandLogo height={64} />
+				<img 
+					src="/apg_pfp_animation.gif" 
+					alt="Mundo APG Logo" 
+					height="64" 
+					class="brand-logo-gif"
+					onerror="this.style.display='none'; document.getElementById('brand-logo-fallback').style.display='block';"
+				/>
+				<div id="brand-logo-fallback" style="display: none;">
+					<BrandLogo height={64} />
+				</div>
 			</header>
 
 			<!-- Botones de Enlace (Solo visibles en Móvil) -->

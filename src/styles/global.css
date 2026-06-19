@@ -46,9 +46,11 @@ main {
 	margin-bottom: 2rem;
 }
 
-.logo-placeholder {
-	color: var(--text-muted);
-	opacity: 0.6;
+.brand-logo-gif {
+	border-radius: 4px;
+	display: block;
+	height: 64px;
+	width: auto;
 }
 
 /* Asymmetric Gallery Layout */
